@@ -23,6 +23,8 @@ export const add = mutation({
       throw new Error("Missing organization"); 
     }
 
+    throw new Error("Tracking Test"); 
+
     const userId = await context.db.insert("users", {
       name: "JDream",
     });
