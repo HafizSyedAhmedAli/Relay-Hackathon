@@ -56,7 +56,6 @@ export const WidgetAuthScreen = () => {
       ...values,
       organizationId,
       metadata,
-      expiresAt: 0,
     });
 
     console.log("contactSessionId", { contactSessionId });
