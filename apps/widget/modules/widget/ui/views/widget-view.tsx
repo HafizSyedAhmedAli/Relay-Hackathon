@@ -3,8 +3,10 @@
 import { screenAtom } from "@/modules/widget/atoms/widget-atoms";
 import { WidgetAuthScreen } from "@/modules/widget/ui/screens/widget-auth-screen";
 import { WidgetErrorScreen } from "@/modules/widget/ui/screens/widget-error-screen";
-import { useAtomValue } from "jotai";
 import { WidgetLoadingScreen } from "@/modules/widget/ui/screens/widget-loading-screen";
+import { WidgetSelectionScreen } from "@/modules/widget/ui/screens/widget-selection-screen";
+import { useAtomValue } from "jotai";
+import { WidgetChatScreen } from "@/modules/widget/ui/screens/widget-chat-screen";
 
 export const WidgetView = ({
   organizationId,
@@ -19,8 +21,8 @@ export const WidgetView = ({
     auth: <WidgetAuthScreen />,
     voice: <p>TODO: Voice</p>,
     inbox: <p>TODO: Inbox</p>,
-    selection: <p>TODO: Selection</p>,
-    chat: <p>TODO: Chat</p>,
+    selection: <WidgetSelectionScreen />,
+    chat: <WidgetChatScreen />,
     contact: <p>TODO: Contact</p>,
   };
 
