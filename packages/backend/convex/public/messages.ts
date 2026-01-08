@@ -1,8 +1,11 @@
 import { ConvexError, v } from "convex/values";
 import { action, query } from "../_generated/server";
-import { internal } from "../_generated/api";
+import { components, internal } from "../_generated/api";
 import { supportAgent } from "../system/ai/agents/supportAgent";
 import { paginationOptsValidator } from "convex/server";
+import { resolveConversation } from "../system/ai/tools/resolveConversation";
+import { escalateConversation } from "../system/ai/tools/escalateConversation";
+import { saveMessage } from "@convex-dev/agent";
 
 export const create = action({
   args: {
@@ -26,7 +29,7 @@ export const create = action({
     }
 
     const conversation = await context.runQuery(
-      internal.system.ai.conversations.getByThreadId,
+      internal.system.conversations.getByThreadId,
       {
         threadId: args.threadId,
       }
@@ -47,12 +50,26 @@ export const create = action({
     }
 
     // Implement Subscription check
+    const shouldTriggerAgent = conversation.status === "unresolved";
 
-    await supportAgent.generateText(
-      context,
-      { threadId: args.threadId },
-      { prompt: args.prompt }
-    );
+    if (shouldTriggerAgent) {
+      await supportAgent.generateText(
+        context,
+        { threadId: args.threadId },
+        {
+          prompt: args.prompt,
+          tools: {
+            resolveConversation,
+            escalateConversation,
+          },
+        }
+      );
+    } else {
+      await saveMessage(context, components.agent, {
+        threadId: args.threadId,
+        prompt: args.prompt,
+      });
+    }
   },
 });
 
@@ -77,6 +94,6 @@ export const getMany = query({
       paginationOpts: args.paginationOpts,
     });
 
-    return paginated; 
+    return paginated;
   },
 });
