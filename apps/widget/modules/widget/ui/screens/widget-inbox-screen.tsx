@@ -10,7 +10,7 @@ import { api } from "@workspace/backend/_generated/api";
 import { Button } from "@workspace/ui/components/button";
 import { ConversationStatusIcon } from "@workspace/ui/components/conversation-status-icon";
 import { InfiniteScrollTrigger } from "@workspace/ui/components/infinite-scroll-trigger";
-import { useInfiniteScroll } from "@workspace/ui/hooks/useInfiniteScroll";
+import { useInfiniteScroll } from "@workspace/ui/hooks/use-infinite-scroll";
 import { usePaginatedQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { useAtomValue, useSetAtom } from "jotai";

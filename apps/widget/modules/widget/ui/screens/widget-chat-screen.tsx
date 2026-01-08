@@ -32,7 +32,7 @@ import {
   AIInputTools,
 } from "@workspace/ui/components/ai/input";
 import { Form, FormField } from "@workspace/ui/components/form";
-import { useInfiniteScroll } from "@workspace/ui/hooks/useInfiniteScroll";
+import { useInfiniteScroll } from "@workspace/ui/hooks/use-infinite-scroll";
 import { InfiniteScrollTrigger } from "@workspace/ui/components/infinite-scroll-trigger";
 
 const formSchema = z.object({
