@@ -6,6 +6,7 @@ import { paginationOptsValidator } from "convex/server";
 import { resolveConversation } from "../system/ai/tools/resolveConversation";
 import { escalateConversation } from "../system/ai/tools/escalateConversation";
 import { saveMessage } from "@convex-dev/agent";
+import { search } from "../system/ai/tools/search";
 
 export const create = action({
   args: {
@@ -18,7 +19,7 @@ export const create = action({
       internal.system.contactSessions.getOne,
       {
         contactSessionId: args.contactSessionId,
-      }
+      },
     );
 
     if (!contactSession || contactSession.expiresAt < Date.now()) {
@@ -32,7 +33,7 @@ export const create = action({
       internal.system.conversations.getByThreadId,
       {
         threadId: args.threadId,
-      }
+      },
     );
 
     if (!conversation) {
@@ -59,10 +60,11 @@ export const create = action({
         {
           prompt: args.prompt,
           tools: {
-            resolveConversation,
-            escalateConversation,
+            resolveConversationTool: resolveConversation,
+            escalateConversationTool: escalateConversation,
+            searchTool: search,
           },
-        }
+        },
       );
     } else {
       await saveMessage(context, components.agent, {
