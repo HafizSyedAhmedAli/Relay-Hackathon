@@ -1,5 +1,7 @@
+import { FilesView } from "@/modules/files/ui/views/files-view";
+
 const page = () => {
-  return <div>Files</div>;
+  return <FilesView />;
 };
 
 export default page;
