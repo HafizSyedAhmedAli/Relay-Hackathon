@@ -1,8 +1,13 @@
 import {
+  AISuggestion,
+  AISuggestions,
+} from "@workspace/ui/components/ai/suggestion";
+import {
   contactSessionIdAtomFamily,
   conversationIdAtom,
   organizationIdAtom,
   screenAtom,
+  widgetSettingsAtom,
 } from "@/modules/widget/atoms/widget-atoms";
 import { DicebearAvatar } from "@workspace/ui/components/dicebar-avatar";
 import { WidgetHeader } from "@/modules/widget/ui/components/widget-header";
@@ -34,6 +39,7 @@ import {
 import { Form, FormField } from "@workspace/ui/components/form";
 import { useInfiniteScroll } from "@workspace/ui/hooks/use-infinite-scroll";
 import { InfiniteScrollTrigger } from "@workspace/ui/components/infinite-scroll-trigger";
+import { useMemo } from "react";
 
 const formSchema = z.object({
   message: z.string().min(1, "Message is required"),
@@ -43,10 +49,11 @@ export const WidgetChatScreen = () => {
   const setScreen = useSetAtom(screenAtom);
   const setConversationId = useSetAtom(conversationIdAtom);
 
+  const widgetSettings = useAtomValue(widgetSettingsAtom);
   const conversationId = useAtomValue(conversationIdAtom);
   const organizationId = useAtomValue(organizationIdAtom);
   const contactSessionId = useAtomValue(
-    contactSessionIdAtomFamily(organizationId || "")
+    contactSessionIdAtomFamily(organizationId || ""),
   );
 
   const onBack = () => {
@@ -54,11 +61,21 @@ export const WidgetChatScreen = () => {
     setScreen("selection");
   };
 
+  const suggestions = useMemo(() => {
+    if (!widgetSettings) return;
+
+    return Object.keys(widgetSettings.defaultSuggestions).map((key) => {
+      return widgetSettings.defaultSuggestions[
+        key as keyof typeof widgetSettings.defaultSuggestions
+      ];
+    });
+  }, [widgetSettings]);
+
   const conversation = useQuery(
     api.public.conversations.getOne,
     conversationId && contactSessionId
       ? { conversationId, contactSessionId }
-      : "skip"
+      : "skip",
   );
 
   const messages = useThreadMessages(
@@ -66,7 +83,7 @@ export const WidgetChatScreen = () => {
     conversation?.threadId && contactSessionId
       ? { threadId: conversation.threadId, contactSessionId }
       : "skip",
-    { initialNumItems: 10 }
+    { initialNumItems: 10 },
   );
 
   const { topElementRef, handleLoadMore, canLoadMore, isLoadingMore } =
@@ -126,13 +143,39 @@ export const WidgetChatScreen = () => {
                 <AIResponse>{message.content}</AIResponse>
               </AIMessageContent>
               {message.role === "assistant" && (
-                <DicebearAvatar seed="assistant" size={32} className="border-0" imageUrl="/logo.svg" />
+                <DicebearAvatar
+                  seed="assistant"
+                  size={32}
+                  className="border-0"
+                  imageUrl="/logo.svg"
+                />
               )}
             </AIMessage>
           ))}
         </AIConversationContent>
       </AIConversation>
-      {/* Add Suggestions */}
+      {toUIMessages(messages.results ?? [])?.length === 1 && (
+        <AISuggestions className="flex w-full flex-col items-end p-2">
+          {suggestions?.map((suggestion) => {
+            if (!suggestion) return null;
+
+            return (
+              <AISuggestion
+                key={suggestion}
+                onClick={() => {
+                  form.setValue("message", suggestion, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                    shouldTouch: true,
+                  });
+                  form.handleSubmit(onSubmit)();
+                }}
+                suggestion={suggestion}
+              />
+            );
+          })}
+        </AISuggestions>
+      )}
       <Form {...form}>
         <AIInput
           className="rounded-none border-x-0 border-b-0"
