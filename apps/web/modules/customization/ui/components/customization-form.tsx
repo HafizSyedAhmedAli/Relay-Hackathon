@@ -48,8 +48,8 @@ export const CustomizationForm = ({
         initialData?.greetMessage || "Hi! How can I help you today?",
       defaultSuggestions: {
         suggestion1: initialData?.defaultSuggestions.suggestion1 || "",
-        suggestion2: initialData?.defaultSuggestions.suggestion1 || "",
-        suggestion3: initialData?.defaultSuggestions.suggestion1 || "",
+        suggestion2: initialData?.defaultSuggestions.suggestion2 || "",
+        suggestion3: initialData?.defaultSuggestions.suggestion3 || "",
       },
       vapiSettings: {
         assistantId: initialData?.vapiSettings.assistantId || "",
@@ -105,7 +105,7 @@ export const CustomizationForm = ({
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="Welcome message shown when chat open"
+                      placeholder="Welcome message shown when the chat opens"
                       rows={3}
                     />
                   </FormControl>
@@ -124,10 +124,9 @@ export const CustomizationForm = ({
               <div>
                 <h3 className="mb-4 text-sm">Default Suggestions</h3>
                 <p className="mb-4 text-muted-foreground text-sm">
-                  Quick reply suggestions shows to customer to help guide the
+                  Quick reply suggestions shown to customers to help guide the
                   conversation
                 </p>
-
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
