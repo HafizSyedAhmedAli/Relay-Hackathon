@@ -23,7 +23,7 @@ export const getMany = query({
     const conversations = await context.db
       .query("conversations")
       .withIndex("by_contact_session_id", (q) =>
-        q.eq("contactSessionId", args.contactSessionId)
+        q.eq("contactSessionId", args.contactSessionId),
       )
       .order("desc")
       .paginate(args.paginationOpts);
@@ -49,7 +49,7 @@ export const getMany = query({
           threadId: conversation.threadId,
           lastMessage,
         };
-      })
+      }),
     );
 
     return {
@@ -113,6 +113,13 @@ export const create = mutation({
       });
     }
 
+    const widgetSettings = await context.db
+      .query("widgetSettings")
+      .withIndex("by_organization_id", (q) =>
+        q.eq("organizationId", args.organizationId),
+      )
+      .unique();
+
     const { threadId } = await supportAgent.createThread(context, {
       userId: args.organizationId,
     });
@@ -121,8 +128,8 @@ export const create = mutation({
       threadId,
       message: {
         role: "assistant",
-        // Later modify to widget setting's intial message.
-        content: "Hello, how I can help you today?",
+        content:
+          widgetSettings?.greetMessage || "Hello, how I can help you today?", // 5:41:40
       },
     });
 
