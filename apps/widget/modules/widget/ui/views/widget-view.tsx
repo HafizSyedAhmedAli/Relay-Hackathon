@@ -8,6 +8,7 @@ import { WidgetLoadingScreen } from "@/modules/widget/ui/screens/widget-loading-
 import { WidgetSelectionScreen } from "@/modules/widget/ui/screens/widget-selection-screen";
 import { useAtomValue } from "jotai";
 import { WidgetInboxScreen } from "@/modules/widget/ui/screens/widget-inbox-screen";
+import { WidgetVoiceScreen } from "../screens/widget-voice-screen";
 
 export const WidgetView = ({
   organizationId,
@@ -20,7 +21,7 @@ export const WidgetView = ({
     loading: <WidgetLoadingScreen organizationId={organizationId} />,
     error: <WidgetErrorScreen />,
     auth: <WidgetAuthScreen />,
-    voice: <p>TODO: Voice</p>,
+    voice: <WidgetVoiceScreen />,
     inbox: <WidgetInboxScreen />,
     selection: <WidgetSelectionScreen />,
     chat: <WidgetChatScreen />,
