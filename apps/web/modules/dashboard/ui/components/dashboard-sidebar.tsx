@@ -46,11 +46,6 @@ const configurationItems = [
     icon: PaletteIcon,
   },
   {
-    title: "Integrations",
-    url: "/integrations",
-    icon: LayoutDashboardIcon,
-  },
-  {
     title: "Voice Assistant",
     url: "/plugins/vapi",
     icon: Mic,

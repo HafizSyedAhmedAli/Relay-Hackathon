@@ -4,16 +4,16 @@ import { Protect } from "@clerk/nextjs";
 
 const page = () => {
   return (
-    <Protect
-      condition={(has) => has({ plan: "pro" })}
-      fallback={
-        <PremiumFeatureOverlay>
-          <CustomizationView />
-        </PremiumFeatureOverlay>
-      }
-    >
+    // <Protect
+    //   condition={(has) => has({ plan: "pro" })}
+    //   fallback={
+    //     <PremiumFeatureOverlay>
+    //       <CustomizationView />
+    //     </PremiumFeatureOverlay>
+    //   }
+    // >
       <CustomizationView />
-    </Protect>
+    // </Protect>
   );
 };
 
