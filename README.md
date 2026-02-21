@@ -1,7 +1,7 @@
 # 🔵 Relay — AI-Powered Customer Support Platform
 
-> **Built for [Hackathon HEC GenAI] 
-> Live Demo (Admin Dashboard):** [https://relay-hackathon-web.vercel.app]
+> **Built for Hackathon HEC GenAI<br> 
+> Live Demo (Admin Dashboard):** [https://relay-hackathon-web.vercel.app]<br>
 > Live Demo (Client):** [https://relay-hackathon-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRbKEtSxWtBq]
 
 Relay is a full-stack customer support platform that combines a real-time operator dashboard with an embeddable chat widget. Businesses can manage customer conversations, train an AI assistant on their own documents, connect voice calling via Vapi, and let the AI handle — or escalate — support tickets automatically.
