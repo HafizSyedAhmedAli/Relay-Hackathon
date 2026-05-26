@@ -1,14 +1,13 @@
 # 🔵 Relay — AI-Powered Customer Support Platform
 
-> **Built for Hackathon HEC GenAI<br> 
-> Live Demo (Admin Dashboard):** [https://relay-hackathon-web.vercel.app]<br>
-> Live Demo (Client):** [https://relay-hackathon-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRbKEtSxWtBq]
+> **Live Demo (Admin Dashboard):** https://relay-demo-web.vercel.app  
+> **Live Demo (Client):** https://relay-demo-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRbKEtSxWtBq
 
 Relay is a full-stack customer support platform that combines a real-time operator dashboard with an embeddable chat widget. Businesses can manage customer conversations, train an AI assistant on their own documents, connect voice calling via Vapi, and let the AI handle — or escalate — support tickets automatically.
 
 ---
 
-## 🔐 Demo Credentials
+# 🔐 Demo Credentials
 
 Use these to log straight in and explore without signing up:
 
@@ -21,20 +20,22 @@ Use these to log straight in and explore without signing up:
 
 ---
 
-## 🗺️ What You Can Explore
+# 🗺️ What You Can Explore
 
 Relay has two parts: the **Operator Dashboard** (where your support team works) and the **Chat Widget** (what your customers see). Both are live.
 
 ---
 
-## 🖥️ Part 1 — The Operator Dashboard
+# 🖥️ Part 1 — The Operator Dashboard
 
-### Step 1 · Sign In
+## Step 1 · Sign In
+
 Go to the deployed URL and sign in using the demo credentials above. You'll land on the **Conversations** page.
 
 ---
 
-### Step 2 · Conversations
+## Step 2 · Conversations
+
 This is the main workspace for support operators.
 
 - The **left panel** lists all customer conversations, with real-time status indicators (Unresolved, Escalated, Resolved).
@@ -49,7 +50,8 @@ This is the main workspace for support operators.
 
 ---
 
-### Step 3 · Knowledge Base
+## Step 3 · Knowledge Base
+
 Navigate to **Knowledge Base** in the sidebar.
 
 This is where you upload documents that the AI uses to answer customer questions. The AI will **only** answer based on what's in here — it never makes things up.
@@ -59,11 +61,11 @@ This is where you upload documents that the AI uses to answer customer questions
 - The file is processed, chunked, embedded, and added to the vector search index automatically.
 - Uploaded files appear in the table. You can delete them at any time.
 
-#### 📄 Pre-loaded FAQ Document
+### 📄 Pre-loaded FAQ Document
 
 The demo organization already has **`faq.txt`** uploaded to the knowledge base. This is a customer support FAQ covering account management, billing, features, and technical support. You can go straight to the widget and test the AI with real questions from it.
 
-**Try asking the AI these questions in the chat widget:**
+### Try asking the AI these questions in the chat widget:
 
 | Topic | Sample Question |
 |-------|----------------|
@@ -87,7 +89,8 @@ You can also upload your own additional documents using **Add New** to see the i
 
 ---
 
-### Step 4 · Widget Customization
+## Step 4 · Widget Customization
+
 Navigate to **Widget Customization** in the sidebar.
 
 Configure how the chat widget looks and behaves for your customers:
@@ -100,19 +103,22 @@ Hit **Save Settings** when done.
 
 ---
 
-### Step 5 · Voice Assistant (Vapi Plugin)
+## Step 5 · Voice Assistant (Vapi Plugin)
+
 Navigate to **Voice Assistant** in the sidebar.
 
 This page lets you connect your Vapi account to enable AI voice calls and phone support directly in the widget.
 
-**To connect:**
-1. Click **Connect**.
-2. Enter the Public and Private API keys from the credentials table above.
-3. Click **Connect** — your Vapi assistants and phone numbers will load automatically.
+### To connect:
+
+1. Click **Connect**
+2. Enter the Public and Private API keys from the credentials table above
+3. Click **Connect** — your Vapi assistants and phone numbers will load automatically
 
 Once connected you'll see two tabs:
-- **Phone Numbers** — all Vapi numbers on your account with their status.
-- **AI Assistants** — all configured assistants with their model and greeting message.
+
+- **Phone Numbers** — all Vapi numbers on your account with their status
+- **AI Assistants** — all configured assistants with their model and greeting message
 
 Click **Configure** to jump to Widget Customization and assign an assistant/number to the widget.
 
@@ -120,20 +126,21 @@ To disconnect, click **Disconnect** and confirm.
 
 ---
 
-### Step 6 · Plans & Billing
+## Step 6 · Plans & Billing
+
 Navigate to **Plans & Billing** in the sidebar to see the pricing table powered by Clerk's billing system. Upgrading a plan increases the maximum number of operators allowed in the organization and unlocks premium features.
 
 ---
 
-## 💬 Part 2 — The Customer Widget
+# 💬 Part 2 — The Customer Widget
 
 The widget is what your customers interact with. You can open it directly at:
 
-```
-https://relay-hackathon-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRbKEtSxWtBq
+```txt
+https://relay-demo-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRbKEtSxWtBq
 ```
 
-### Widget Flow
+## Widget Flow
 
 1. **Intro / Auth** — The customer enters their name and email to start a session.
 2. **Selection Screen** — They choose between:
@@ -145,17 +152,15 @@ https://relay-hackathon-widget.vercel.app/?organizationId=org_39yVuORsf1fLVCmFRb
 
 ---
 
-### 🎤 Testing the Voice Call
+## 🎤 Testing the Voice Call
 
 When you open the widget and tap **Start voice call**, you'll be connected to a live Vapi AI voice agent. Below is a sample conversation script you can follow — just speak naturally and the agent will respond.
 
 > **Note:** Allow microphone access when prompted by your browser.
 
----
+### Sample Voice Conversation Script
 
-**Sample Voice Conversation Script**
-
-```
+```txt
 AI:   Hello. You've reached Vapi Bank customer support.
       My name is Tom. How may I assist you today?
 
@@ -179,13 +184,11 @@ You:  No thanks.
 AI:   Thank you for calling Vapi Bank. Have a wonderful day.
 ```
 
----
-
 This demonstrates the full voice call loop — identity verification, data lookup, and a natural conversation close — all handled by the AI without any human operator.
 
 ---
 
-## ⚙️ How the AI Works
+# ⚙️ How the AI Works
 
 | Situation | What Happens |
 |-----------|-------------|
@@ -200,7 +203,7 @@ The AI **never** guesses or makes things up. If it's not in the knowledge base, 
 
 ---
 
-## 🏗️ Tech Stack
+# 🏗️ Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -216,7 +219,7 @@ The AI **never** guesses or makes things up. If it's not in the knowledge base, 
 
 ---
 
-## 🎯 Key Things to Test
+# 🎯 Key Things to Test
 
 Here's a suggested walkthrough to see everything in action:
 
@@ -232,7 +235,3 @@ Here's a suggested walkthrough to see everything in action:
 10. ✅ Upload a new document and ask the AI a question from it in the widget
 11. ✅ Open the widget, tap **Start voice call**, and follow the voice script above
 12. ✅ Mark a conversation as Resolved from the dashboard
-
----
-
-*Made with ❤️ for HEC GenAI Hackathon*
